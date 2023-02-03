@@ -1,24 +1,15 @@
 import React from "react";
 
-function Guess({ guesses, setGuesses }) {
-  const [guess, setGuess] = React.useState("");
-  const submit = (e) => {
-    e.preventDefault();
-    if (guess.length !== 5) return;
-    setGuesses([...guesses, guess]);
-    console.log({ guess });
-    setGuess("");
-  };
+function Guess({ content }) {
+  const lettersArray = content ? content.split("") : [];
   return (
-    <form className="guess-input-wrapper" onSubmit={submit}>
-      <label htmlFor="guess-input">Enter guess:</label>
-      <input
-        id="guess-input"
-        type="text"
-        value={guess}
-        onChange={(e) => setGuess(e.target.value.toUpperCase())}
-      />
-    </form>
+    <p className="guess">
+      <span className="cell">{lettersArray[0]}</span>
+      <span className="cell">{lettersArray[1]}</span>
+      <span className="cell">{lettersArray[2]}</span>
+      <span className="cell">{lettersArray[3]}</span>
+      <span className="cell">{lettersArray[4]}</span>
+    </p>
   );
 }
 

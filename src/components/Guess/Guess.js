@@ -1,16 +1,29 @@
 import React from "react";
+import { checkGuess } from "../../game-helpers";
+import { range } from "../../utils";
 
-function Guess({ content }) {
-  const lettersArray = content ? content.split("") : [];
-  return (
-    <p className="guess">
-      <span className="cell">{lettersArray[0]}</span>
-      <span className="cell">{lettersArray[1]}</span>
-      <span className="cell">{lettersArray[2]}</span>
-      <span className="cell">{lettersArray[3]}</span>
-      <span className="cell">{lettersArray[4]}</span>
-    </p>
-  );
+function Guess({ value, answer }) {
+  if (!value) {
+    return (
+      <p className="guess">
+        {range(5).map((index) => (
+          <span key={index} className="cell"></span>
+        ))}
+      </p>
+    );
+  } else {
+    return (
+      <p className="guess">
+        {checkGuess(value, answer).map((letterObj, index) => {
+          return (
+            <span key={index} className={`cell ${letterObj.status}`}>
+              {letterObj.letter}
+            </span>
+          );
+        })}
+      </p>
+    );
+  }
 }
 
 export default Guess;
